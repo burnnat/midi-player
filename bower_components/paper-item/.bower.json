@@ -1,0 +1,19 @@
+{
+  "name": "paper-item",
+  "private": true,
+  "dependencies": {
+    "polymer": "Polymer/polymer#master",
+    "core-icon": "Polymer/core-icon#master",
+    "paper-ripple": "Polymer/paper-ripple#master"
+  },
+  "homepage": "https://github.com/Polymer/paper-item",
+  "_release": "0d02d6119a",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "0d02d6119a8712b130a57bd5a4490ac0115ea5eb"
+  },
+  "_source": "git://github.com/Polymer/paper-item.git",
+  "_target": "master",
+  "_originalSource": "Polymer/paper-item"
+}

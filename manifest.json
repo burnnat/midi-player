@@ -1,0 +1,32 @@
+{
+  "manifest_version": 2,
+  "name": "midi-player",
+  "description": "",
+  "version": "0.0.1",
+  "minimum_chrome_version": "23",
+  "icons": {
+    "16": "assets/icon_16.png",
+    "128": "assets/icon_128.png"
+  },
+  "permissions": [
+    "fileSystem"
+  ],
+  "app": {
+    "background": {
+      "scripts": ["background.js"]
+    }
+  },
+  "file_handlers": {
+    "midi": {
+      "types": [
+        "application/x-midi",
+        "audio/midi"
+      ],
+      "extensions": [
+        "mid",
+        "midi"
+      ],
+      "title": "midi-player"
+    }
+  }
+}

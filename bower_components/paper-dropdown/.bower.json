@@ -1,0 +1,23 @@
+{
+  "name": "paper-dropdown",
+  "private": false,
+  "dependencies": {
+    "polymer": "Polymer/polymer#master",
+    "core-dropdown": "Polymer/core-dropdown#master",
+    "core-icon": "Polymer/core-icon#master",
+    "core-icons": "Polymer/core-icons#master",
+    "core-menu": "Polymer/core-menu#master",
+    "paper-item": "Polymer/paper-item#master",
+    "paper-shadow": "Polymer/paper-shadow#master"
+  },
+  "homepage": "https://github.com/Polymer/paper-dropdown",
+  "_release": "156063ce1f",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "156063ce1f50cbc6dcc9a09ca93e5dd671da0513"
+  },
+  "_source": "git://github.com/Polymer/paper-dropdown.git",
+  "_target": "master",
+  "_originalSource": "Polymer/paper-dropdown"
+}

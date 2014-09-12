@@ -1,0 +1,14 @@
+{
+  "name": "midi",
+  "homepage": "https://github.com/mudcube/MIDI.js",
+  "_release": "9314588240",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "9314588240a6bbf846b0a02c820aaf87d8f12248"
+  },
+  "_source": "git://github.com/mudcube/MIDI.js.git",
+  "_target": "*",
+  "_originalSource": "midi",
+  "_direct": true
+}
