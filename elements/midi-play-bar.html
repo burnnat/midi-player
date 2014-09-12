@@ -14,9 +14,18 @@
         icon="{{ player.playing ? 'av:pause' : 'av:play-arrow' }}"
         on-click="{{ onPlayPause }}">
       </paper-icon-button>
-      <paper-slider flex></paper-slider>
+      <span>{{ offset | timeFormat }}</span>
+      <paper-slider
+        max="{{ total * resolution }}"
+        value="{{ offset * resolution }}"
+        on-down="{{ onSliderDrag }}"
+        on-up="{{ onSliderChange }}"
+        on-click="{{ onSliderChange }}"
+        flex>
+      </paper-slider>
+      <span>-{{ remaining | timeFormat }}</span>
     </core-toolbar>
   </template>
-  
+
   <script src="midi-play-bar.js"></script>
 </polymer-element>
