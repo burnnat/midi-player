@@ -9,13 +9,13 @@ chrome.app.runtime.onLaunched.addListener(function(launchData) {
     'index.html',
     {
       id: 'mainWindow',
-      bounds: {width: 800, height: 600}
+      bounds: {width: 800, height: 124}
     },
-    function() {
-      if (launchData.items) {
-        // opening a file
-        
-        alert('Opening file');
+    function(createdWindow) {
+      var launchItems = launchData.items;
+
+      if (launchItems) {
+        createdWindow.contentWindow.FILE = launchItems[0].entry;
       }
     }
   );
