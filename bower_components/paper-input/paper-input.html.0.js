@@ -165,6 +165,10 @@
           return;
         }
 
+        this.$.input.focus();
+        // prevent self-focus
+        e.preventDefault();
+
         // The underline spills from the tap location
         var rect = this.$.underline.getBoundingClientRect();
         var right = e.x - rect.left;

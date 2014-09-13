@@ -93,6 +93,12 @@
       this.fire('core-change');
     },
 
+    immediateValueChanged: function() {
+      if (!this.dragging) {
+        this.value = this.immediateValue;
+      }
+    },
+
     expandKnob: function() {
       this.expand = true;
     },
@@ -117,12 +123,8 @@
       return (this.max - this.min) * ratio + this.min;
     },
 
-    measureWidth: function() {
-      this._w = this.$.sliderBar.offsetWidth;
-    },
-
     trackStart: function(e) {
-      this.measureWidth();
+      this._w = this.$.sliderBar.offsetWidth;
       this._x = this._ratio * this._w;
       this._startx = this._x || 0;
       this._minx = - this._startx;
@@ -153,18 +155,19 @@
     },
 
     bardown: function(e) {
-      this.measureWidth();
-      this.$.sliderKnob.classList.add('transiting');
+      this.transiting = true;
+      this._w = this.$.sliderBar.offsetWidth;
       var rect = this.$.sliderBar.getBoundingClientRect();
       var ratio = (e.x - rect.left) / this._w;
       this.positionKnob(ratio);
-      this.value = this.calcStep(this.calcKnobPosition(ratio));
       this.expandJob = this.job(this.expandJob, this.expandKnob, 60);
       this.fire('change');
     },
 
-    knobTransitionEnd: function() {
-      this.$.sliderKnob.classList.remove('transiting');
+    knobTransitionEnd: function(e) {
+      if (e.target === this.$.sliderKnob) {
+        this.transiting = false;
+      }
     },
 
     updateMarkers: function() {

@@ -7,23 +7,24 @@
   <script src="bower_components/platform/platform.js"></script>
 
   <link rel="import" href="bower_components/paper-toast/paper-toast.html">
-  <link rel="import" href="elements/midi-play-bar.html">
+  <link rel="import" href="elements/midi-app.html">
 
   <script src="bower_components/midi/soundfont/acoustic_grand_piano-ogg.js"></script>
+
   <script src="MIDI.js"></script>
-  
+
   <script src="bower_components/midi/inc/jasmid/stream.js"></script>
   <script src="bower_components/midi/inc/jasmid/midifile.js"></script>
   <script src="bower_components/midi/inc/jasmid/replayer.js"></script>
 
   <script src="bower_components/midi/inc/Base64.js" type="text/javascript"></script>
   <script src="bower_components/midi/inc/base64binary.js" type="text/javascript"></script>
-  
+
   <link rel="stylesheet" href="styles.css">
 </head>
 
 <body unresolved>
-  <midi-play-bar id="playbar"></midi-play-bar>
+  <midi-app id="app" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0;"></midi-app>
   <paper-toast id="toast" class="capsule"></paper-toast>
   <script src="main.js"></script>
 </body>
