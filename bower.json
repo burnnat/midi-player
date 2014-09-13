@@ -9,6 +9,6 @@
     "polymer": "Polymer/polymer#master",
     "core-animated-pages": "Polymer/core-animated-pages#master",
     "paper-elements": "Polymer/paper-elements#master",
-    "midi": "*"
+    "midi": "burnnat/MIDI.js#master"
   }
 }

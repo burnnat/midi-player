@@ -7,7 +7,16 @@
 	  npm install
 	3) Install Grunt CLI globally
 		npm install grunt-cli -g
+	4) Install Bower dependencies
+	  bower install
 */
+
+var fs = require("fs");
+var path = require("path");
+var vm = require("vm");
+
+var async = require("async");
+var glob = require("glob");
 
 module.exports = function (grunt) {
 	grunt.initConfig({
@@ -35,7 +44,59 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 
+  grunt.registerTask('soundfont', 'Build soundfont JSON files.', function() {
+    var done = this.async();
+
+    // options is optional
+    glob(
+      "bower_components/midi-js-soundfonts/FluidR3_GM/*-ogg.js",
+      function (err, files) {
+        if (err) {
+          grunt.log.error(err);
+          done(false);
+          return;
+        }
+        else if (files.length < 1) {
+          grunt.log.error("No soundfont files found. Have you run bower install?");
+          done(false);
+          return;
+        }
+
+        async.each(
+          files,
+          function(file, next) {
+            fs.readFile(file, { encoding: 'utf-8' }, function(err, data) {
+              if (err) {
+                grunt.log.error(err);
+                next(err);
+              }
+              else {
+                var sandbox = {};
+
+                vm.runInNewContext(data, sandbox, file);
+
+                var output = sandbox.MIDI.Soundfont;
+                var instrument = Object.keys(output)[0];
+
+                fs.writeFile(
+                  path.join('soundfont', path.basename(file, '.js') + '.json'),
+                  JSON.stringify(output[instrument]),
+                  function(err) {
+                    next();
+                  }
+                );
+              }
+            });
+          },
+          function(err) {
+            done(!err);
+          }
+        );
+      }
+    );
+  });
+
 	///
-	grunt.registerTask('default', ['concat', 'uglify']);
+	grunt.registerTask('default', ['concat', 'uglify', 'soundfont']);
 	///
 };

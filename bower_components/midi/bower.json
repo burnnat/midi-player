@@ -1,0 +1,12 @@
+{
+  "name": "midi",
+  "version": "0.3.0",
+  "description": "Library to assist in creating HTML5 MIDI apps.",
+  "author": "Michael Deal",
+  "main": "./build/MIDI.min.js",
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "midi-js-soundfonts": "gleitz/midi-js-soundfonts#master"
+  }
+}

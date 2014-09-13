@@ -33,10 +33,6 @@ Polymer('midi-app', {
         results.push(
           MIDI.GeneralMIDI.byId[event.programNumber].id
         );
-
-        // Naive implementation, just sets all the program changes up front.
-        // Ideally, MIDI.js would handle this as part of its playback.
-        MIDI.channels[event.channel].instrument = event.programNumber;
       }
     }
 
@@ -47,9 +43,10 @@ Polymer('midi-app', {
         MIDI.loader.message('Loading instrument: ' + instrumentId);
 
         var req = new XMLHttpRequest();
+        var url = 'bower_components/midi/soundfont/' + instrumentId + '-ogg.json';
 
         req.overrideMimeType("application/json");
-        req.open('GET', 'soundfont/' + instrumentId + '-ogg.json', true);
+        req.open('GET', url, true);
 
         req.onload = function() {
           MIDI.Soundfont[instrumentId] = JSON.parse(req.responseText);

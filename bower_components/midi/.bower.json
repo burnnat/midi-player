@@ -1,14 +1,21 @@
 {
   "name": "midi",
-  "homepage": "https://github.com/mudcube/MIDI.js",
-  "_release": "9314588240",
+  "description": "Library to assist in creating HTML5 MIDI apps.",
+  "author": "Michael Deal",
+  "main": "./build/MIDI.min.js",
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "midi-js-soundfonts": "gleitz/midi-js-soundfonts#master"
+  },
+  "homepage": "https://github.com/burnnat/MIDI.js",
+  "_release": "a4aa54f0ff",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "9314588240a6bbf846b0a02c820aaf87d8f12248"
+    "commit": "a4aa54f0ff8811a36536292e96e5734050a2cceb"
   },
-  "_source": "git://github.com/mudcube/MIDI.js.git",
-  "_target": "*",
-  "_originalSource": "midi",
-  "_direct": true
+  "_source": "git://github.com/burnnat/MIDI.js.git",
+  "_target": "master",
+  "_originalSource": "burnnat/MIDI.js"
 }
