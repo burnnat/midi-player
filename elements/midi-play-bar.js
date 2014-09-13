@@ -2,8 +2,6 @@ Polymer('midi-play-bar', {
 
   player: null,
 
-  songTitle: '',
-
   // all time values are given in seconds
   offset: 0,
   remaining: 0,
@@ -26,14 +24,11 @@ Polymer('midi-play-bar', {
     }
   },
 
-  loadMidi: function(name, data) {
+  loadMidi: function(data) {
     var player = this.player;
 
     player.currentData = data;
     player.loadMidiFile();
-
-    this.fileName = name;
-    this.parseMetadata();
   },
 
   parseMetadata: function() {

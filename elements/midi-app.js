@@ -2,23 +2,54 @@ Polymer('midi-app', {
 
   file: null,
 
+  fileName: '',
+  songTitle: '',
+
   fileChanged: function(oldFile, newFile) {
     var me = this;
     var playbar = this.$.playbar;
 
-    newFile.file(function(file) {
-      var reader = new FileReader();
+    if (newFile) {
+      newFile.file(function(file) {
+        var reader = new FileReader();
 
-      reader.onloadend = function(e) {
-        playbar.player = MIDI.Player;
-        playbar.loadMidi(newFile.name, this.result);
-        MIDI.loader.message('File loaded.');
+        reader.onloadend = function(e) {
+          var data = this.result;
 
-        me.loadInstruments();
-      };
+          playbar.player = MIDI.Player;
+          playbar.loadMidi(data);
 
-      reader.readAsBinaryString(file);
-    });
+          me.loadFile(newFile.name, data);
+          me.loadInstruments();
+        };
+
+        reader.readAsBinaryString(file);
+      });
+    }
+    else {
+      playbar.player.stop();
+    }
+  },
+
+  loadFile: function(filename, data) {
+    this.fileName = filename;
+    this.parseMetadata();
+
+    MIDI.loader.message('File loaded.');
+  },
+
+  parseMetadata: function() {
+    var data = MIDI.Player.data;
+    var event;
+
+    for (var i = 0; i < data.length; i++) {
+      event = data[i][0].event;
+
+      if (event.type === 'meta' && event.subtype === 'trackName') {
+        this.songTitle = event.text;
+        return;
+      }
+    }
   },
 
   loadInstruments: function() {
@@ -113,5 +144,9 @@ Polymer('midi-app', {
     setTimeout(self.getNext, 1);
 
     return self;
-    }
+  },
+
+  closeFile: function() {
+    this.file = null;
+  }
 });

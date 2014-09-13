@@ -7,13 +7,13 @@ html /deep/ core-toolbar {
 }
 
 html /deep/ paper-button.primary {
-    background: #4285f4;
+    background: #455ede;
     color: #fff;
 }
 
 html /deep/ paper-button.primary #ripple,
 html /deep/ paper-button.primary::shadow #ripple {
-    color: #2a56c6;
+    color: #204093;
 }
 
 html /deep/ paper-button.primary #focusBg,

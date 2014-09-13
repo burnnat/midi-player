@@ -1,7 +1,12 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 
+<link rel="import" href="../bower_components/core-icons/core-icons.html">
+<link rel="import" href="../bower_components/core-icons/av-icons.html">
+<link rel="import" href="../bower_components/core-toolbar/core-toolbar.html">
 <link rel="import" href="../bower_components/core-animated-pages/core-animated-pages.html">
+
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 
 <link rel="import" href="midi-play-bar.html">
 
@@ -10,36 +15,87 @@
     <style>
       :host {
         display: inline-block;
-        padding: 10px;
       }
 
-      core-animated-pages, div[layout] {
+      .hidden {
+        visibility: hidden;
+      }
+
+      core-animated-pages {
+        position: absolute;
+        z-index: 0;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+      }
+
+      div[layout] {
         width: 100%;
         height: 100%;
+      }
+
+      .header {
+        z-index: 10;
+        text-align: center;
       }
 
       paper-button.primary {
         font-size: 16px;
         width: 10em;
       }
+
+      section.metadata div:first-of-type   {
+        font-size: 22px;
+        line-height: 1.2em;
+      }
+
+      section.metadata div {
+        font-size: 14px;
+      }
+
+      midi-play-bar {
+        margin: 10px;
+      }
     </style>
+    <core-toolbar class="header">
+      <paper-icon-button
+        class="{{ { hidden: !file } | tokenList }}"
+        icon="close"
+        on-click="{{ closeFile }}">
+      </paper-icon-button>
+      <section class="metadata" flex>
+        <template if="{{ !file }}">
+          <div>MIDI Player</div>
+        </template>
+        <template if="{{ file }}">
+          <template if="{{ songTitle }}">
+            <div>{{ songTitle }}</div>
+          </template>
+          <div>{{ fileName }}</div>
+        </template>
+      </section>
+      <paper-icon-button
+        icon="av:volume-up">
+      </paper-icon-button>
+    </core-toolbar>
     <core-animated-pages selected="{{ file ? 1 : 0 }}" transitions="cross-fade-all">
       <section>
         <div vertical layout center>
           <div flex></div>
-            <paper-button
-              class="primary"
-              label="Open File..."
-              on-click="{{ chooseFile }}"
-              raisedButton>
-            </paper-button>
+          <paper-button
+            class="primary"
+            label="Open File..."
+            on-click="{{ chooseFile }}"
+            raisedButton>
+          </paper-button>
           <div flex></div>
         </div>
       </section>
       <section>
         <div vertical layout>
           <div flex></div>
-            <midi-play-bar id="playbar"></midi-play-bar>
+          <midi-play-bar id="playbar"></midi-play-bar>
           <div flex></div>
         </div>
       </section>
