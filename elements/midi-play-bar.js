@@ -2,6 +2,8 @@ Polymer('midi-play-bar', {
 
   player: null,
 
+  songTitle: '',
+
   // all time values are given in seconds
   offset: 0,
   remaining: 0,
@@ -21,6 +23,30 @@ Polymer('midi-play-bar', {
       newPlayer.setAnimation(function(data) {
         me.onPlayerUpdate(data);
       });
+    }
+  },
+
+  loadMidi: function(name, data) {
+    var player = this.player;
+
+    player.currentData = data;
+    player.loadMidiFile();
+
+    this.fileName = name;
+    this.parseMetadata();
+  },
+
+  parseMetadata: function() {
+    var data = this.player.data;
+    var event;
+
+    for (var i = 0; i < data.length; i++) {
+      event = data[i][0].event;
+
+      if (event.type === 'meta' && event.subtype === 'trackName') {
+        this.songTitle = event.text;
+        return;
+      }
     }
   },
 

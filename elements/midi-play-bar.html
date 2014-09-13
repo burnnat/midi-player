@@ -7,13 +7,29 @@
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../bower_components/paper-slider/paper-slider.html">
 
-<polymer-element name="midi-play-bar" attributes="player">
+<polymer-element name="midi-play-bar" attributes="player fileName">
   <template>
+    <style>
+      div.title {
+        font-size: 20px;
+      }
+
+      section.metadata {
+        margin-bottom: 1em;
+      }
+    </style>
+    <section class="metadata">
+      <template if="{{ songTitle }}">
+        <div class="title">{{ songTitle }}</div>
+      </template>
+      <div class="filename">{{ fileName }}</div>
+    </section>
     <core-toolbar>
       <paper-icon-button
         icon="{{ player.playing ? 'av:pause' : 'av:play-arrow' }}"
         on-click="{{ onPlayPause }}">
       </paper-icon-button>
+      <span>{{ title }}</span>
       <span>{{ offset | timeFormat }}</span>
       <paper-slider
         max="{{ total * resolution }}"

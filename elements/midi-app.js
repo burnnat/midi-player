@@ -14,14 +14,14 @@ Polymer('midi-app', {
   },
 
   fileChanged: function(oldFile, newFile) {
+    var playbar = this.$.playbar;
+
     newFile.file(function(file) {
       var reader = new FileReader();
 
       reader.onloadend = function(e) {
-        MIDI.Player.currentData = this.result;
-    		MIDI.Player.loadMidiFile();
-
-    		MIDI.loader.message('File loaded.');
+        playbar.loadMidi(newFile.name, this.result);
+        MIDI.loader.message('File loaded.');
       };
 
       reader.readAsBinaryString(file);
@@ -35,7 +35,7 @@ Polymer('midi-app', {
       {
         accepts: [
           {
-            description: 'MIDI Files',
+            description: 'MIDI files',
             mimeTypes: [
               "application/x-midi",
               "audio/midi"
@@ -45,7 +45,8 @@ Polymer('midi-app', {
               "midi"
             ],
           }
-        ]
+        ],
+        acceptsAllTypes: false
       },
       function(entry, entries) {
         me.file = entry;
