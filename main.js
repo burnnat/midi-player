@@ -11,8 +11,7 @@ window.addEventListener('polymer-ready', function(e) {
     },
 
     update: function(id, message, percent) {
-      percent = percent || message.replace(/.*?(\d+)%.*/g, '$1');
-      this.message('Loading player: ' + percent + '%');
+      this.message(message + ': ' + percent + '%');
     },
 
     stop: function() {

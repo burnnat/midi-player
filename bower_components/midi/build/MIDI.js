@@ -383,8 +383,14 @@ if (window.AudioContext || window.webkitAudioContext) (function () {
 	var master;
 	var sources = {};
 	var masterVolume = 127;
+	var loadedInstruments = {};
 	var audioBuffers = {};
 	var audioLoader = function (instrument, urlList, index, bufferList, callback) {
+	  if (loadedInstruments[instrument]) {
+	    // already loaded, so just skip ahead
+	    return callback(instrument);
+	  }
+
 		var synth = MIDI.GeneralMIDI.byName[instrument];
 		var instrumentId = synth.number;
 		var url = urlList[index];
@@ -397,7 +403,7 @@ if (window.AudioContext || window.webkitAudioContext) (function () {
 			var msg = url;
 			while (msg.length < 3) msg += "&nbsp;";
 			if (typeof (MIDI.loader) !== "undefined") {
-				MIDI.loader.update(null, synth.instrument + "<br>Processing: " + (index / 87 * 100 >> 0) + "%<br>" + msg);
+				MIDI.loader.update(null, "Loading '" + synth.instrument + "'", index / 87 * 100 >> 0);
 			}
 			buffer.id = url;
 			bufferList[index] = buffer;
@@ -409,6 +415,7 @@ if (window.AudioContext || window.webkitAudioContext) (function () {
 					var nodeId = MIDI.keyToNote[buffer.id];
 					audioBuffers[instrumentId + "" + nodeId] = buffer;
 				}
+				loadedInstruments[instrument] = true;
 				callback(instrument);
 			}
 		});
@@ -438,7 +445,7 @@ if (window.AudioContext || window.webkitAudioContext) (function () {
 		var source = ctx.createBufferSource();
 		sources[channel + "" + note] = source;
 		source.buffer = audioBuffers[instrument + "" + note];
-		// source.connect(ctx.destination);
+		source.connect(master);
 		///
 		if (ctx.createGain) { // firefox
 			source.gainNode = ctx.createGain();

@@ -71,6 +71,11 @@ Polymer('midi-app', {
       items: results,
 
       getNext: function(instrumentId) {
+        if (MIDI.Soundfont[instrumentId]) {
+          // already loaded, so just skip ahead
+          return queue.getNext();
+        }
+
         MIDI.loader.message('Loading instrument: ' + instrumentId);
 
         var req = new XMLHttpRequest();
