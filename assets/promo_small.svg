@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="440"
+   height="280"
+   id="svg3223"
+   version="1.1"
+   inkscape:version="0.48.3.1 r9886"
+   sodipodi:docname="promo_small.svg"
+   inkscape:export-filename="/home/nathaniel/Downloads/Workspace/midi-player/assets/promo_small.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
+  <defs
+     id="defs3225" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1"
+     inkscape:cx="225.22836"
+     inkscape:cy="52.794357"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1366"
+     inkscape:window-height="722"
+     inkscape:window-x="0"
+     inkscape:window-y="24"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata3228">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-772.36218)">
+    <rect
+       style="fill:#455ede;fill-opacity:1;stroke:none"
+       id="rect3231"
+       width="440"
+       height="280"
+       x="0"
+       y="772.36218"
+       ry="0"
+       rx="0" />
+    <text
+       xml:space="preserve"
+       style="font-size:74.92041779px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:condensed;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Earthbound;-inkscape-font-specification:Earthbound Bold Condensed"
+       x="27.059443"
+       y="1009.2444"
+       id="text4527"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4529"
+         x="27.059443"
+         y="1009.2444"
+         style="font-size:74.92041779px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:condensed;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;font-family:Earthbound;-inkscape-font-specification:Earthbound Bold Condensed">MIDI Player</tspan></text>
+    <path
+       style="fill:#ffffff;fill-opacity:0.67630059;display:inline"
+       inkscape:connector-curvature="0"
+       d="m 135.29201,829.66497 v 64.13312 c -3.49258,-0.7296 -7.556,-0.45263 -11.58564,1.03696 -9.06247,3.36761 -12.26119,11.56538 -9.85624,18.30058 2.39819,6.7386 9.49482,9.46443 18.5573,6.09682 7.69448,-2.85757 12.73745,-9.1942 12.60909,-15.16942 0,0 0,-34.01044 0,-52.97982 l 38.37786,-8.79226 v 40.69499 c -3.49258,-0.72959 -7.556,-0.45261 -11.58563,1.03697 -9.06924,3.3676 -12.26796,11.56537 -9.863,18.30059 2.40494,6.73858 9.49482,9.46442 18.56404,6.09682 7.70125,-2.85757 12.73408,-9.19421 12.61248,-15.16943 v -76.00587 l -57.82688,12.42333 z"
+       id="path7-6-0" />
+    <path
+       style="fill:#ffffff;display:inline"
+       inkscape:connector-curvature="0"
+       d="m 51.792008,813.66497 v 64.13312 c -3.492581,-0.7296 -7.556001,-0.45263 -11.585642,1.03696 -9.062473,3.36761 -12.261191,11.56538 -9.856241,18.30058 2.398193,6.7386 9.494823,9.46443 18.557295,6.09682 7.694488,-2.85757 12.737451,-9.1942 12.609095,-15.16942 0,0 0,-34.01044 0,-52.97982 l 38.377861,-8.79226 v 40.69499 c -3.49258,-0.72959 -7.556,-0.45261 -11.58563,1.03697 -9.06924,3.3676 -12.267957,11.56537 -9.863001,18.30059 2.404941,6.73858 9.494821,9.46442 18.564041,6.09682 7.701254,-2.85757 12.734084,-9.19421 12.612484,-15.16943 v -76.00587 l -57.826884,12.42333 z"
+       id="path7-6" />
+    <path
+       style="fill:#ffffff;fill-opacity:0.42196536;display:inline"
+       inkscape:connector-curvature="0"
+       d="m 218.79201,845.66496 v 64.13312 c -3.49258,-0.7296 -7.556,-0.45263 -11.58564,1.03696 -9.06247,3.36761 -12.26119,11.56538 -9.85624,18.30058 2.39819,6.7386 9.49482,9.46443 18.5573,6.09682 7.69448,-2.85757 12.73745,-9.1942 12.60909,-15.16942 0,0 0,-34.01044 0,-52.97982 l 38.37786,-8.79226 v 40.69499 c -3.49258,-0.72959 -7.556,-0.45261 -11.58563,1.03697 -9.06924,3.3676 -12.26796,11.56537 -9.863,18.30059 2.40494,6.73858 9.49482,9.46442 18.56404,6.09682 7.70125,-2.85757 12.73408,-9.19421 12.61248,-15.16943 v -76.00587 l -57.82688,12.42333 z"
+       id="path7-6-9" />
+  </g>
+</svg>
