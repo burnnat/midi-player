@@ -6,6 +6,10 @@ Polymer('midi-volume', {
     effectiveVolume: 'muted ? 0 : volume'
   },
 
+  effectiveVolumeChanged: function() {
+    this.fire('volume-change', { volume: this.effectiveVolume });
+  },
+
   toggleMute: function() {
     this.muted = !this.muted;
   },

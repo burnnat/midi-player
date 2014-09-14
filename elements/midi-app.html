@@ -76,7 +76,7 @@
           <div>{{ fileName }}</div>
         </template>
       </section>
-      <midi-volume></midi-volume>
+      <midi-volume on-volume-change="{{ setVolume }}"></midi-volume>
     </core-toolbar>
     <core-animated-pages selected="{{ file ? 1 : 0 }}" transitions="cross-fade-all">
       <section>

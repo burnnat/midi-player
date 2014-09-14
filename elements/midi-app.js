@@ -97,6 +97,15 @@ Polymer('midi-app', {
     });
   },
 
+  setVolume: function(event) {
+    if (MIDI.setVolume) {
+      // Channel number -1 is a special value used to
+      // indicate that the volume specified is the
+      // master volume to be applied over all channels.
+      MIDI.setVolume(-1, 127 * event.detail.volume / 100);
+    }
+  },
+
   chooseFile: function() {
     var me = this;
 
