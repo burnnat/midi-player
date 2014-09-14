@@ -7,8 +7,8 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 --><!--
 `paper-slider` allows user to select a value from a range of values by
-moving the slider thumb.  The interactive nature of the slider makes it a 
-great choice for settings that reflect intensity levels, such as volume, 
+moving the slider thumb.  The interactive nature of the slider makes it a
+great choice for settings that reflect intensity levels, such as volume,
 brightness, or color saturation.
 
 Example:
@@ -61,29 +61,130 @@ To change the slider secondary progress bar color:
 <link rel="import" href="../paper-progress/paper-progress.html">
 <link rel="import" href="../paper-input/paper-input.html">
 
-</head><body><polymer-element name="paper-slider" extends="core-range" attributes="snaps pin disabled secondaryProgress editable immediateValue">
+</head><body><polymer-element name="paper-slider" extends="core-range" attributes="vertical snaps pin disabled secondaryProgress editable immediateValue">
 <template>
 
   <link rel="stylesheet" href="paper-slider.css">
 
+  <style>
+
+    :host {
+      {{dimension}}: 200px;
+    }
+
+    #sliderContainer {
+      {{dimension}}: calc(100% - 32px);
+      {{crossDimension}}: 32px;
+      {{edge}}: {{ vertical ? '32px' : '0px' }};
+    }
+
+    #sliderContainer.editable {
+      {{dimension}}: calc(100% - 72px);
+      margin-{{crossEdge}}: 12px;
+      margin-{{crossStart}}: 12px;
+      margin-{{start}}: 0;
+      margin-{{edge}}: 0;
+    }
+
+    .bar-container {
+      {{crossEdge}}: 0;
+      {{start}}: 16px;
+    }
+
+    .ring > .bar-container {
+      {{start}}: 20px;
+      {{dimension}}: calc(100% - 4px);
+      transition: {{start}} 0.18s ease, {{dimension}} 0.18s ease;
+    }
+
+    .ring.expand:not(.pin) > .bar-container {
+      {{start}}: 30px;
+      {{dimension}}: calc(100% - 14px);
+    }
+
+    #sliderBar {
+      {{crossEdge}}: 15px;
+      {{start}}: 0;
+      {{crossDimension}}: 2px;
+      {{dimension}}: 100%;
+      padding-{{crossEdge}}: 8px;
+      padding-{{crossStart}}: 8px;
+      padding-{{edge}}: 0;
+      padding-{{start}}: 0;
+      margin-{{crossEdge}}: -8px;
+      margin-{{crossStart}}: -8px;
+      margin-{{edge}}: 0;
+      margin-{{start}}: 0;
+    }
+
+    .ring #sliderBar {
+      {{start}}: -4px;
+      {{dimension}}: calc(100% + 4px);
+    }
+
+    .ring.expand:not(.pin) #sliderBar {
+      {{start}}: -14px;
+      {{dimension}}: calc(100% + 14px);
+    }
+
+    .slider-markers {
+      {{crossEdge}}: 15px;
+      {{start}}: 15px;
+      {{crossDimension}}: 2px;
+      {{dimension}}: calc(100% + 2px);
+    }
+
+    .transiting #sliderBar::shadow #activeProgress {
+      transition: {{dimension}} 0.08s ease;
+    }
+
+    #sliderKnob {
+      {{start}}: 0;
+      {{crossEdge}}: 0;
+      {{dimension}}: 32px;
+      {{crossDimension}}: 32px;
+    }
+
+    .transiting > #sliderKnob {
+      transition: {{start}} 0.08s ease;
+    }
+
+    .pin > #sliderKnob > #sliderKnobInner::before {
+      {{crossEdge}}: 0;
+      {{start}}: 0;
+      margin-{{start}}: 3px;
+    }
+
+    .pin > #sliderKnob > #sliderKnobInner::after {
+      {{crossEdge}}: 0;
+      {{start}}: 0;
+    }
+
+    /* editable: paper-input */
+    .slider-input {
+      {{dimension}}: 40px;
+    }
+
+  </style>
+
   <core-a11y-keys target="{{disabled ? null : $.sliderKnob}}" keys="left down pagedown home" on-keys-pressed="{{decrementKey}}"></core-a11y-keys>
   <core-a11y-keys target="{{disabled ? null : $.sliderKnob}}" keys="right up pageup end" on-keys-pressed="{{incrementKey}}"></core-a11y-keys>
 
-  <div id="sliderContainer" class="{{ {disabled: disabled, pin: pin, snaps: snaps, ring: immediateValue <= min, expand: expand, dragging: dragging, transiting: transiting, editable: editable} | tokenList }}">
+  <div id="sliderContainer" class="{{ {disabled: disabled, pin: pin, snaps: snaps, ring: immediateValue <= min, expand: expand, dragging: dragging, transiting: transiting, editable: editable, vertical: vertical} | tokenList }}">
 
     <div class="bar-container">
-      <paper-progress id="sliderBar" aria-hidden="true" min="{{min}}" max="{{max}}" value="{{immediateValue}}" secondaryprogress="{{secondaryProgress}}" on-down="{{bardown}}" on-up="{{resetKnob}}" on-trackstart="{{trackStart}}" on-trackx="{{trackx}}" on-trackend="{{trackEnd}}"></paper-progress>
+      <paper-progress id="sliderBar" vertical="{{vertical}}" aria-hidden="true" min="{{min}}" max="{{max}}" value="{{immediateValue}}" secondaryprogress="{{secondaryProgress}}" on-down="{{bardown}}" on-up="{{resetKnob}}" on-trackstart="{{trackStart}}" on-trackx="{{track}}" on-tracky="{{track}}" on-trackend="{{trackEnd}}"></paper-progress>
     </div>
 
     <template if="{{snaps &amp;&amp; !disabled}}">
-      <div class="slider-markers" horizontal="" layout="">
+      <div class="slider-markers" {{="" vertical="" ?="" 'vertical'="" :="" 'horizontal'="" }}="" layout="">
         <template repeat="{{markers}}">
           <div flex="" class="slider-marker"></div>
         </template>
       </div>
     </template>
 
-    <div id="sliderKnob" on-down="{{expandKnob}}" on-up="{{resetKnob}}" on-trackstart="{{trackStart}}" on-trackx="{{trackx}}" on-trackend="{{trackEnd}}" on-transitionend="{{knobTransitionEnd}}" role="slider" aria-valuenow="{{value}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" aria-valuetext="{{value}}" tabindex="0" center-justified="" center="" horizontal="" layout="">
+    <div id="sliderKnob" on-down="{{expandKnob}}" on-up="{{resetKnob}}" on-trackstart="{{trackStart}}" on-trackx="{{track}}" on-tracky="{{track}}" on-trackend="{{trackEnd}}" on-transitionend="{{knobTransitionEnd}}" role="slider" aria-valuenow="{{value}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" aria-valuetext="{{value}}" tabindex="0" center-justified="" center="" {{="" vertical="" ?="" 'vertical'="" :="" 'horizontal'="" }}="" layout="">
 
       <div id="sliderKnobInner" value="{{immediateValue}}"></div>
 
@@ -92,7 +193,7 @@ To change the slider secondary progress bar color:
   </div>
 
   <template if="{{editable}}">
-    <paper-input id="input" class="slider-input" value="{{immediateValue}}" disabled?="{{disabled}}" on-change="{{inputChange}}"></paper-input>
+    <paper-input id="input" class="{{ {'slider-input': true, vertical: vertical} | tokenList }}" value="{{immediateValue}}" disabled?="{{disabled}}" on-change="{{inputChange}}"></paper-input>
   </template>
 
 </template>

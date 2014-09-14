@@ -1,0 +1,55 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../bower_components/core-icons/core-icons.html">
+<link rel="import" href="../bower_components/core-icons/av-icons.html">
+
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/paper-slider/paper-slider.html">
+
+<link rel="import" href="midi-volume-menu-button.html">
+
+<polymer-element name="midi-volume" attributes="volume muted">
+  <template>
+    <style>
+      #mute-button {
+        color: black;
+      }
+
+      #volume-slider {
+        height: 150px;
+      }
+
+      #volume-slider::shadow #sliderContainer.disabled {
+        /* Allow slider to be re-enabled via click  */
+        pointer-events: auto;
+      }
+
+      midi-volume-menu-button /deep/ core-menu#menu {
+        padding: 4px 0;
+      }
+    </style>
+
+    <midi-volume-menu-button
+      icon="{{ effectiveVolume | toIcon }}"
+      halign="right"
+      valign="top">
+      <div vertical layout center>
+        <paper-icon-button
+          id="mute-button"
+          icon="{{ effectiveVolume | toIcon }}"
+          on-click="{{ toggleMute }}">
+        </paper-icon-button>
+        <paper-slider
+          id="volume-slider"
+          value="100"
+          immediateValue="{{ volume }}"
+          disabled="{{ muted }}"
+          on-click="{{ unmute }}"
+          vertical>
+        </paper-slider>
+      </div>
+    </midi-volume-menu-button>
+  </template>
+
+  <script src="midi-volume.js"></script>
+</polymer-element>

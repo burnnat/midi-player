@@ -2,6 +2,48 @@
 
   Polymer('paper-slider', {
 
+    vertical: false,
+
+    axis: 'x',
+    crossAxis: 'y',
+    dimension: 'width',
+    crossDimension: 'height',
+    offset: 'offsetWidth',
+    start: 'left',
+    crossStart: 'bottom',
+    edge: 'right',
+    crossEdge: 'top',
+
+    verticalChanged: function(wasVertical, isVertical) {
+      var values = isVertical
+        ? {
+          axis: 'y',
+          crossAxis: 'x',
+          dimension: 'height',
+          crossDimension: 'width',
+          offset: 'offsetHeight',
+          start: 'bottom',
+          crossStart: 'left',
+          edge: 'top',
+          crossEdge: 'right'
+        }
+        : {
+          axis: 'x',
+          crossAxis: 'y',
+          dimension: 'width',
+          crossDimension: 'height',
+          offset: 'offsetWidth',
+          start: 'left',
+          crossStart: 'bottom',
+          edge: 'right',
+          crossEdge: 'top'
+        };
+
+      for (var key in values) {
+        this[key] = values[key];
+      }
+    },
+
     /**
      * Fired when the slider's value changes.
      *
@@ -28,8 +70,8 @@
     snaps: false,
 
     /**
-     * If true, a pin with numeric value label is shown when the slider thumb 
-     * is pressed.  Use for settings for which users need to know the exact 
+     * If true, a pin with numeric value label is shown when the slider thumb
+     * is pressed.  Use for settings for which users need to know the exact
      * value of the setting.
      *
      * @attribute pin
@@ -80,6 +122,7 @@
     },
 
     ready: function() {
+      this.verticalChanged(false, this.vertical);
       this.update();
     },
 
@@ -111,7 +154,7 @@
     positionKnob: function(ratio) {
       this.immediateValue = this.calcStep(this.calcKnobPosition(ratio)) || 0;
       this._ratio = this.snaps ? this.calcRatio(this.immediateValue) : ratio;
-      this.$.sliderKnob.style.left = this._ratio * 100 + '%';
+      this.$.sliderKnob.style[this.start] = this._ratio * 100 + '%';
     },
 
     inputChange: function() {
@@ -124,7 +167,7 @@
     },
 
     trackStart: function(e) {
-      this._w = this.$.sliderBar.offsetWidth;
+      this._w = this.$.sliderBar[this.offset];
       this._x = this._ratio * this._w;
       this._startx = this._x || 0;
       this._minx = - this._startx;
@@ -134,14 +177,21 @@
       e.preventTap();
     },
 
-    trackx: function(e) {
-      var x = Math.min(this._maxx, Math.max(this._minx, e.dx));
+    track: function(e) {
+      if (e.type !== 'track' + this.axis) {
+        return;
+      }
+      var delta = (this.vertical ? -1 : 1) * e['d'+this.axis];
+      var x = Math.min(this._maxx, Math.max(this._minx, delta));
       this._x = this._startx + x;
       this.immediateValue = this.calcStep(
           this.calcKnobPosition(this._x / this._w)) || 0;
       var s =  this.$.sliderKnob.style;
-      s.transform = s.webkitTransform = 'translate3d(' + (this.snaps ? 
-          (this.calcRatio(this.immediateValue) * this._w) - this._startx : x) + 'px, 0, 0)';
+      var offset = (this.snaps ?
+          (this.calcRatio(this.immediateValue) * this._w) - this._startx : x);
+      offset = (this.vertical ? -1 : 1) * offset + 'px';
+      s.transform = s.webkitTransform = 'translate3d('
+          + (this.vertical ? '0, ' + offset : offset + ', 0') + ', 0)';
     },
 
     trackEnd: function() {
@@ -156,9 +206,9 @@
 
     bardown: function(e) {
       this.transiting = true;
-      this._w = this.$.sliderBar.offsetWidth;
+      this._w = this.$.sliderBar[this.offset];
       var rect = this.$.sliderBar.getBoundingClientRect();
-      var ratio = (e.x - rect.left) / this._w;
+      var ratio = (this.vertical ? -1 : 1) * (e[this.axis] - rect[this.start]) / this._w;
       this.positionKnob(ratio);
       this.expandJob = this.job(this.expandJob, this.expandKnob, 60);
       this.fire('change');

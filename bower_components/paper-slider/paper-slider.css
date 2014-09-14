@@ -9,40 +9,26 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 :host {
   display: inline-block;
-  width: 200px;
   cursor: default;
 }
 
 #sliderContainer {
   position: relative;
-  width: calc(100% - 32px);
-  height: 32px;
 }
 
 #sliderContainer.editable {
   float: left;
-  width: calc(100% - 72px);
-  margin: 12px 0;
+}
+
+#sliderContainer.editable.vertical {
+  float: none;
 }
 
 .bar-container {
   position: absolute;
-  top: 0;
-  left: 16px;
   height: 100%;
   width: 100%;
   overflow: hidden;
-}
-
-.ring > .bar-container {
-  left: 20px;
-  width: calc(100% - 4px);
-  transition: left 0.18s ease, width 0.18s ease;
-}
-
-.ring.expand:not(.pin) > .bar-container {
-  left: 30px;
-  width: calc(100% - 14px);
 }
 
 .ring.expand.dragging > .bar-container {
@@ -51,30 +37,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 #sliderBar {
   position: absolute;
-  top: 15px;
-  left: 0;
-  height: 2px;
-  width: 100%;
-  padding: 8px 0;
-  margin: -8px 0;
-}
-
-.ring #sliderBar {
-  left: -4px;
-  width: calc(100% + 4px);
-}
-
-.ring.expand:not(.pin) #sliderBar {
-  left: -14px;
-  width: calc(100% + 14px);
 }
 
 .slider-markers {
   position: absolute;
-  top: 15px;
-  left: 15px;
-  height: 2px;
-  width: calc(100% + 2px);
   box-sizing: border-box;
   pointer-events: none;
 }
@@ -92,20 +58,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   background-color: #3f51b5;
 }
 
-.transiting #sliderBar::shadow #activeProgress {
-  transition: width 0.08s ease;
-}
-
 #sliderKnob {
   position: absolute;
-  left: 0;
-  top: 0;
-  width: 32px;
-  height: 32px;
-}
-
-.transiting > #sliderKnob {
-  transition: left 0.08s ease;
 }
 
 #sliderKnob:focus {
@@ -154,11 +108,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 .pin > #sliderKnob > #sliderKnobInner::before {
   content: "";
   position: absolute;
-  top: 0;
-  left: 0;
   width: 26px;
   height: 26px;
-  margin-left: 3px;
   border-radius: 50% 50% 50% 0;
   -webkit-transform: rotate(-45deg) scale(0) translate(0);
   transform: rotate(-45deg) scale(0) translate(0);
@@ -178,16 +129,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   transform: rotate(-45deg) scale(1) translate(17px, -17px);
 }
 
+.pin.expand.vertical > #sliderKnob > #sliderKnobInner::before {
+  -webkit-transform: rotate(45deg) scale(1) translate(17px, -17px);
+  transform: rotate(45deg) scale(1) translate(17px, -17px);
+}
+
 .pin > #sliderKnob > #sliderKnobInner::after {
   content: attr(value);
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 32px;
-  height: 26px;
   text-align: center;
   color: #fff;
   font-size: 10px;
+  width: 32px;
+  height: 26px;
   -webkit-transform: scale(0) translate(0);
   transform: scale(0) translate(0);
 }
@@ -197,11 +151,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   transform: scale(1) translate(0, -17px);
 }
 
+.pin.expand.vertical > #sliderKnob > #sliderKnobInner::after {
+  -webkit-transform: scale(1) translate(27px, 3px);
+  transform: scale(1) translate(27px, 3px);
+}
+
 /* editable: paper-input */
 .slider-input {
-  width: 40px;
   float: right;
   overflow: hidden;
+}
+
+.slider-input.vertical {
+  float: none;
+  width: 100%;
 }
 
 .slider-input::shadow input {

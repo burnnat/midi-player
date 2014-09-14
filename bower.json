@@ -9,6 +9,8 @@
     "polymer": "Polymer/polymer#master",
     "core-animated-pages": "Polymer/core-animated-pages#master",
     "paper-elements": "Polymer/paper-elements#master",
+    "paper-progress": "burnnat/paper-progress#master",
+    "paper-slider": "burnnat/paper-slider#master",
     "midi": "burnnat/MIDI.js#master"
   }
 }
