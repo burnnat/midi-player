@@ -5,6 +5,20 @@ Polymer('midi-app', {
   fileName: '',
   songTitle: '',
 
+  created: function() {
+    var me = this;
+
+    window.addEventListener('keypress', function(e) {
+      switch (e.keyCode) {
+        case 32:
+          me.$.playbar.onPlayPause();
+          break;
+        default:
+          break;
+      }
+    });
+  },
+
   fileChanged: function(oldFile, newFile) {
     var me = this;
     var playbar = this.$.playbar;
@@ -28,6 +42,7 @@ Polymer('midi-app', {
     }
     else {
       playbar.player.stop();
+      playbar.player = null;
     }
   },
 

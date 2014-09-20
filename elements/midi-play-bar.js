@@ -48,11 +48,13 @@ Polymer('midi-play-bar', {
   onPlayPause: function() {
     var player = this.player;
 
-    if (player.playing) {
-      player.pause(true);
-    }
-    else {
-      player.resume();
+    if (player) {
+      if (player.playing) {
+        player.pause(true);
+      }
+      else {
+        player.resume();
+      }
     }
   },
 
