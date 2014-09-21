@@ -1,21 +1,40 @@
-window.addEventListener('polymer-ready', function(e) {
-  var app = document.getElementById('app');
-  var toast = document.getElementById('toast');
+(function() {
+  var POLYMER_READY = false;
+  var initialFile = null;
 
-  app.file = window.FILE;
+  var loadFile = function(file) {
+    document.getElementById('app').file = file;
+  };
 
-  MIDI.loader = {
-    message: function(message) {
-      toast.text = message;
-      toast.show();
-    },
+  window.addEventListener('polymer-ready', function(e) {
+    POLYMER_READY = true;
 
-    update: function(id, message, percent) {
-      this.message(message + ': ' + percent + '%');
-    },
+    var toast = document.getElementById('toast');
 
-    stop: function() {
+    MIDI.loader = {
+      message: function(message) {
+        toast.text = message;
+        toast.show();
+      },
 
+      update: function(id, message, percent) {
+        this.message(message + ': ' + percent + '%');
+      },
+
+      stop: function() {
+
+      }
+    };
+
+    loadFile(initialFile);
+  });
+
+  window.setFile = function(file) {
+    if (POLYMER_READY) {
+      loadFile(file);
+    }
+    else {
+      initialFile = file;
     }
   };
-});
+})();

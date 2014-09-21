@@ -15,7 +15,7 @@ chrome.app.runtime.onLaunched.addListener(function(launchData) {
       var launchItems = launchData.items;
 
       if (launchItems) {
-        createdWindow.contentWindow.FILE = launchItems[0].entry;
+        createdWindow.contentWindow.setFile(launchItems[0].entry);
       }
     }
   );
