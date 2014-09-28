@@ -113,7 +113,7 @@ module.exports = function(grunt) {
   );
 
   grunt.registerTask(
-    'default',
+    'build',
     [
       'clean:build',
       'mkdir',
@@ -122,6 +122,8 @@ module.exports = function(grunt) {
       'compress:build'
     ]
   );
+
+  grunt.registerTask('default', ['build']);
 
   grunt.registerTask(
     'release',
