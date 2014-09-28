@@ -13,6 +13,8 @@ module.exports = function(grunt) {
   assets = assets.concat(manifest.app.background.scripts);
 
   grunt.initConfig({
+    pkg: grunt.file.readJSON('package.json'),
+
     clean: {
       build: [
         'build/*',
@@ -61,11 +63,32 @@ module.exports = function(grunt) {
       }
     },
 
+    changelog: {
+      build: {
+        options: {
+          after: 'v' + manifest.version,
+          dest: 'CHANGELOG.md',
+          insertType: 'prepend',
+          template: '# <%= pkg.version %> / {{date}}\n\n{{> features}}{{> fixes}}',
+          featureRegex: /^(.*?) ?\(closes #\d+\)(.*)$/gim,
+          fixRegex: /^(.*?) ?\(fixes #\d+\)(.*)$/gim
+        }
+      }
+    },
+
     bump: {
       options: {
         files: [
           'package.json',
           'manifest.json'
+        ],
+
+        updateConfigs: ['pkg'],
+
+        commitFiles: [
+          'package.json',
+          'manifest.json',
+          'CHANGELOG.md'
         ],
 
         commitMessage: 'Release %VERSION%',
@@ -75,6 +98,7 @@ module.exports = function(grunt) {
   });
 
   grunt.loadNpmTasks('grunt-bump');
+  grunt.loadNpmTasks('grunt-changelog');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-compress');
@@ -98,4 +122,16 @@ module.exports = function(grunt) {
       'compress:build'
     ]
   );
+
+  grunt.registerTask(
+    'release',
+    function(target) {
+      if (target == null) {
+        return grunt.warn('Release target must be specified, like release:patch.');
+      }
+
+      grunt.task.run('bump-only:' + target);
+      grunt.task.run('changelog:build');
+      grunt.task.run('bump-commit');
+    });
 };
