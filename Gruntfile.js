@@ -59,9 +59,22 @@ module.exports = function(grunt) {
           }
         ]
       }
+    },
+
+    bump: {
+      options: {
+        files: [
+          'package.json',
+          'manifest.json'
+        ],
+
+        commitMessage: 'Release %VERSION%',
+        push: false
+      }
     }
   });
 
+  grunt.loadNpmTasks('grunt-bump');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-compress');
