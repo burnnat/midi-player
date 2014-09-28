@@ -15,7 +15,15 @@ chrome.app.runtime.onLaunched.addListener(function(launchData) {
       var launchItems = launchData.items;
 
       if (launchItems) {
-        createdWindow.contentWindow.setFile(launchItems[0].entry);
+        var file = launchItems[0].entry;
+        var win = createdWindow.contentWindow;
+
+        if (win.setFile) {
+          win.setFile(file);
+        }
+        else {
+          win.FILE = file;
+        }
       }
     }
   );

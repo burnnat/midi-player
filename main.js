@@ -1,6 +1,6 @@
 (function() {
   var POLYMER_READY = false;
-  var initialFile = null;
+  var initialFile = window.FILE;
 
   var loadFile = function(file) {
     document.getElementById('app').file = file;
