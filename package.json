@@ -1,6 +1,6 @@
 {
   "name": "midi-player",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Chrome app to play MIDI files.",
   "private": true,
   "main": "background.js",
