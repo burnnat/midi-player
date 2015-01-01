@@ -6,7 +6,7 @@ MIDI Player is a Chrome app for playing MIDI files. Supports multiple instrument
 
 ## Acknowledgments ##
 
-Special thanks to the projects that make apps MIDI Player possible:
+Special thanks to the projects that make apps like MIDI Player possible:
 
  - [MIDI.js](http://mudcu.be/midi-js/)
  - [Polymer](http://www.polymer-project.org/)
