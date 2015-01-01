@@ -82,6 +82,11 @@ Polymer('midi-app', {
       }
     }
 
+    if (results.length === 0) {
+      // If no instrument is specified, default to program #0 (grand piano).
+      results.push(MIDI.GeneralMIDI.byId[0].id);
+    }
+
     var queue = this.createQueue({
       items: results,
 
